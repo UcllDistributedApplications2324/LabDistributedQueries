@@ -1,0 +1,49 @@
+openapi: 3.0.3
+info:
+  title: Doctor Service v1
+  description: |-
+    API for Doctor Service
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+paths:
+components:
+  schemas:
+    CheckDoctorEmployedCommand:
+      type: object
+      properties:
+        appointmentId:
+          type: integer
+        fieldOfExpertise:
+          type: string
+    DoctorsOnPayrollEvent:
+      type: object
+      properties:
+        appointmentId:
+          type: integer
+        fieldOfExpertise:
+          type: string
+        doctors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DoctorOnPayroll'
+    DoctorOnPayroll:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        firstName:
+          type: string
+          example: 'Emily'
+        lastName:
+          type: string
+          example: 'Williams'
+        age:
+          type: integer
+          example: 43
+        address:
+          type: string
+          example: 'Naamsestraat 17, 300 Leuven'
