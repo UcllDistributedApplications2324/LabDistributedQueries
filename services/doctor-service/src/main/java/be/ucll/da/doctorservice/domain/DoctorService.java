@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -18,6 +20,12 @@ public class DoctorService {
         return getAllDoctors().stream()
                 .filter(doctor -> doctor.fieldOfExpertise().equals(fieldOfExpertise))
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Doctor> getDoctor(Integer id) {
+        return getAllDoctors().stream()
+                .filter(d -> Objects.equals(d.id(), id))
+                .findFirst();
     }
 
     private List<Doctor> getAllDoctors() {

@@ -116,28 +116,14 @@
                         </goals>
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/patient-service-api.yml</inputSpec>
-                            <generatorName>java</generatorName>
-                            <library>resttemplate</library>
-                            <generateApis>true</generateApis>
-                            <generateApiDocumentation>false</generateApiDocumentation>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModels>true</generateModels>
-                            <generateModelDocumentation>false</generateModelDocumentation>
-                            <generateModelTests>false</generateModelTests>
-                            <skipValidateSpec>true</skipValidateSpec>
-                            <generateSupportingFiles>false</generateSupportingFiles>
-                            <generateApis>false</generateApis>
-                            <modelPackage>be.ucll.da.patientservice.api.messaging.model</modelPackage>
-
+                            <generatorName>spring</generatorName>
+                            <apiPackage>be.ucll.da.patientservice.api</apiPackage>
+                            <modelPackage>be.ucll.da.patientservice.api.model</modelPackage>
+                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                            <generateAliasAsModel>true</generateAliasAsModel>
                             <configOptions>
-                                <dateLibrary>java8</dateLibrary>
-                                <java8>true</java8>
-                                <useBeanValidation>false</useBeanValidation>
-                                <performBeanValidation>false</performBeanValidation>
-                                <interfaceOnly>false</interfaceOnly>
-                                <useOptional>false</useOptional>
-                                <serializableModel>true</serializableModel>
-                                <openApiNullable>false</openApiNullable>
+                                <delegatePattern>true</delegatePattern>
+                                <useTags>true</useTags>
                             </configOptions>
                         </configuration>
                     </execution>

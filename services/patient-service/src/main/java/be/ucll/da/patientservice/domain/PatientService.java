@@ -3,6 +3,9 @@ package be.ucll.da.patientservice.domain;
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class PatientService {
 
@@ -19,5 +22,14 @@ public class PatientService {
         }
 
         return new Patient(id, firstName, lastName, email, false);
+    }
+
+    public Patient getPatient(Integer id) {
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+
+        String email = firstName + "." + lastName + "@google.com";
+
+        return new Patient(id, firstName, lastName, email, true);
     }
 }

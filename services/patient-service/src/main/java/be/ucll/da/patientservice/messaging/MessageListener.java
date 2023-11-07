@@ -1,7 +1,7 @@
 package be.ucll.da.patientservice.messaging;
 
-import be.ucll.da.patientservice.api.messaging.model.PatientValidatedEvent;
-import be.ucll.da.patientservice.api.messaging.model.ValidatePatientCommand;
+import be.ucll.da.patientservice.api.model.PatientValidatedEvent;
+import be.ucll.da.patientservice.api.model.ValidatePatientCommand;
 import be.ucll.da.patientservice.domain.Patient;
 import be.ucll.da.patientservice.domain.PatientService;
 import org.slf4j.Logger;

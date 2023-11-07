@@ -1,8 +1,8 @@
 package be.ucll.da.doctorservice.messaging;
 
-import be.ucll.da.doctorservice.api.messaging.model.CheckDoctorEmployedCommand;
-import be.ucll.da.doctorservice.api.messaging.model.DoctorOnPayroll;
-import be.ucll.da.doctorservice.api.messaging.model.DoctorsOnPayrollEvent;
+import be.ucll.da.doctorservice.api.model.CheckDoctorEmployedCommand;
+import be.ucll.da.doctorservice.api.model.DoctorOnPayroll;
+import be.ucll.da.doctorservice.api.model.DoctorsOnPayrollEvent;
 import be.ucll.da.doctorservice.domain.Doctor;
 import be.ucll.da.doctorservice.domain.DoctorService;
 import org.slf4j.Logger;

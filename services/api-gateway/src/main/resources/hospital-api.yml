@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Hospital API v1
+  description: |-
+    API for the hospital
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+tags:
+  - name: Hospital
+paths:
+  /api/v1/appointment/{day}:
+    get:
+      tags:
+        - Hospital
+      description: Get an overview of all appointments for a single day
+      parameters:
+        - in: path
+          name: day
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: useCqrs
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAppointmentOverview'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+components:
+  schemas:
+    ApiAppointmentOverview:
+      type: object
+      properties:
+        day:
+          type: string
+          format: date
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiAppointment'
+    ApiAppointment:
+      type: object
+      properties:
+        patient:
+          type: object
+          properties:
+            id:
+              type: integer
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+        doctor:
+          type: object
+          properties:
+            id:
+              type: integer
+            firstName:
+              type: string
+            lastName:
+              type: string
+            age:
+              type: integer
+            address:
+              type: string
+        roomId:
+          type: integer
+        accountId:
+          type: integer
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Functional code specifying the error'
+          example: '2300'
+        message:
+          type: string
+          description: 'Brief explanation about the error, for more information consult the Doctor Service team'

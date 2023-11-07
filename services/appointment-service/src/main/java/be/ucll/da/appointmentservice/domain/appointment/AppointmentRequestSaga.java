@@ -103,6 +103,7 @@ public class AppointmentRequestSaga {
 
         if (appointment.getStatus() == AppointmentStatus.REQUEST_REGISTERED) {
             appointment.accept();
+            eventSender.sendAppointmentFinalizedEvent(appointment, true);
         } else {
             throw new RuntimeException("AppointmentRequest is not in a valid status to be accepted");
         }
@@ -115,6 +116,7 @@ public class AppointmentRequestSaga {
             appointment.decline();
             eventSender.sendReleaseRoomCommand(appointment.getId(), appointment.getRoomId(), appointment.getPreferredDay());
             eventSender.sendCloseAccountCommand(appointment.getId(), appointment.getPatientId(), appointment.getAccountId());
+            eventSender.sendAppointmentFinalizedEvent(appointment, false);
         } else {
             throw new RuntimeException("AppointmentRequest is not in a valid status to be declined");
         }

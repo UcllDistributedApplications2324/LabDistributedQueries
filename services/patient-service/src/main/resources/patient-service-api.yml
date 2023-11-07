@@ -9,6 +9,32 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
+  /api/v1/patient/{id}:
+    get:
+      tags:
+        - Patient
+      summary: Get a patient by id
+      description: Get a patient by id
+      operationId: Get patient by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiPatient'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
 components:
   schemas:
     ValidatePatientCommand:
@@ -33,3 +59,24 @@ components:
           type: string
         isClient:
           type: boolean
+    ApiPatient:
+      type: object
+      properties:
+        patientId:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Functional code specifying the error'
+          example: '2300'
+        message:
+          type: string
+          description: 'Brief explanation about the error, for more information consult the Doctor Service team'

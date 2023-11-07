@@ -56,8 +56,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiError'
+  /api/v1/appointment/{day}:
+    get:
+      tags:
+        - Appointment
+      description: Get an overview of all appointments for a single day
+      parameters:
+        - in: path
+          name: day
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAppointmentOverview'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
 components:
   schemas:
+    ApiAppointmentOverview:
+      type: object
+      properties:
+        day:
+          type: string
+          format: date
+        appointments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiAppointment'
+    ApiAppointment:
+      type: object
+      properties:
+        patientId:
+          type: integer
+        doctorId:
+          type: integer
+        roomId:
+          type: integer
+        accountId:
+          type: integer
     ApiAppointmentRequest:
       type: object
       properties:
@@ -94,17 +139,15 @@ components:
         message:
           type: string
           description: 'Brief explanation about the error, for more information consult the Doctor Service team'
-    AppointmentCreatedEvent:
+    AppointmentFinalizedEvent:
       type: object
       properties:
         appointmentRequestNumber:
           type: string
           example: "23-11-5678"
-        dayOfAppointment:
+        day:
           type: string
           format: date
-        patientEmail:
-          type: string
         patientId:
           type: integer
         doctorId:
@@ -113,11 +156,5 @@ components:
           type: integer
         accountId:
           type: integer
-    AppointmentCreationFailedEvent:
-      type: object
-      properties:
-        appointmentRequestNumber:
-          type: string
-          example: "23-11-5678"
-        error:
-          type: string
+        accepted:
+          type: boolean

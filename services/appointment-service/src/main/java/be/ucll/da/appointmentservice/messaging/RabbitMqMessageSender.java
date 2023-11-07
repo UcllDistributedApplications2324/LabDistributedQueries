@@ -1,5 +1,6 @@
 package be.ucll.da.appointmentservice.messaging;
 
+import be.ucll.da.appointmentservice.api.model.AppointmentFinalizedEvent;
 import be.ucll.da.appointmentservice.client.accounting.api.model.ClosePatientAccountCommand;
 import be.ucll.da.appointmentservice.client.accounting.api.model.OpenPatientAccountCommand;
 import be.ucll.da.appointmentservice.client.doctor.api.model.CheckDoctorEmployedCommand;
@@ -7,6 +8,7 @@ import be.ucll.da.appointmentservice.client.notification.api.model.SendEmailComm
 import be.ucll.da.appointmentservice.client.patient.api.model.ValidatePatientCommand;
 import be.ucll.da.appointmentservice.client.room.api.model.ReleaseRoomCommand;
 import be.ucll.da.appointmentservice.client.room.api.model.ReserveRoomCommand;
+import be.ucll.da.appointmentservice.domain.appointment.Appointment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -79,6 +81,20 @@ public class RabbitMqMessageSender {
         command.recipient(recipient);
         command.message(message);
         sendToQueue("q.notification-service.send-email", command);
+    }
+
+    public void sendAppointmentFinalizedEvent(Appointment appointment, boolean isAccepted) {
+        var event = new AppointmentFinalizedEvent();
+        event.appointmentRequestNumber(appointment.getId().toString());
+        event.setDay(appointment.getPreferredDay());
+        event.patientId(appointment.getPatientId());
+        event.doctorId(appointment.getDoctor());
+        event.roomId(appointment.getRoomId());
+        event.accountId(appointment.getAccountId());
+        event.accepted(isAccepted);
+
+        LOGGER.info("Sending event: " + event);
+        this.rabbitTemplate.convertAndSend("x.appointment-finalized", "", event);
     }
 
     private void sendToQueue(String queue, Object message) {

@@ -16,4 +16,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "  (a.status = be.ucll.da.appointmentservice.domain.appointment.AppointmentStatus.REQUEST_REGISTERED OR " +
             "   a.status = be.ucll.da.appointmentservice.domain.appointment.AppointmentStatus.ACCEPTED)")
     List<Appointment> getAppointmentsForDoctorOnDay(Integer doctorId, LocalDate day);
+
+    @Query( "select a " +
+            "from Appointment a " +
+            "where " +
+            "  a.preferredDay = :day AND " +
+            "  a.status = be.ucll.da.appointmentservice.domain.appointment.AppointmentStatus.ACCEPTED")
+    List<Appointment> getAppointmentsOnDay(LocalDate day);
 }
