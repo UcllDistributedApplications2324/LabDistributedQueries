@@ -1,4 +1,4 @@
-package be.ucll.da.patientservice.web;
+package be.ucll.da.patientservice.adapters.web.incoming;
 
 import be.ucll.da.patientservice.api.PatientApiDelegate;
 import be.ucll.da.patientservice.api.model.ApiPatient;

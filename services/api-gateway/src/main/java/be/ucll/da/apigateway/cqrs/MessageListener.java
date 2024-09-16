@@ -4,13 +4,12 @@ import be.ucll.da.apigateway.client.appointment.model.AppointmentFinalizedEvent;
 import be.ucll.da.apigateway.client.doctor.model.DoctorOnPayroll;
 import be.ucll.da.apigateway.client.doctor.model.DoctorsOnPayrollEvent;
 import be.ucll.da.apigateway.client.patient.model.PatientValidatedEvent;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
 
 @Component
 @Transactional

@@ -14,7 +14,7 @@ paths:
   /api/v1/appointment-request:
     post:
       tags:
-        - Hospital
+        - Appointment
       description: Register a new request for an appointment
       requestBody:
         required: true
@@ -38,7 +38,7 @@ paths:
   /api/v1/appointment-confirmation:
     post:
       tags:
-        - Hospital
+        - Appointment
       description: Accept or Decline a previously requested appointment
       requestBody:
         required: true

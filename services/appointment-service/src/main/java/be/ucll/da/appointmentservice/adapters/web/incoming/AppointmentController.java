@@ -1,4 +1,4 @@
-package be.ucll.da.appointmentservice.web;
+package be.ucll.da.appointmentservice.adapters.web.incoming;
 
 import be.ucll.da.appointmentservice.api.AppointmentApiDelegate;
 import be.ucll.da.appointmentservice.api.model.*;

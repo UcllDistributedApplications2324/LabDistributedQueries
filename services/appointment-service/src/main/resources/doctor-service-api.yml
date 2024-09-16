@@ -9,6 +9,32 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
+  /api/v1/doctor/{id}:
+    get:
+      tags:
+        - Doctor
+      summary: Get a doctor by id
+      description: Get a doctor by id
+      operationId: Get doctor by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiDoctor'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
 components:
   schemas:
     CheckDoctorEmployedCommand:
@@ -47,3 +73,27 @@ components:
         address:
           type: string
           example: 'Naamsestraat 17, 300 Leuven'
+    ApiDoctor:
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+        address:
+          type: string
+        fieldOfExpertise:
+          type: string
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Functional code specifying the error'
+          example: '2300'
+        message:
+          type: string
+          description: 'Brief explanation about the error, for more information consult the Doctor Service team'
