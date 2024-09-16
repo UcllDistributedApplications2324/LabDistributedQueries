@@ -85,6 +85,8 @@ components:
           type: integer
         address:
           type: string
+        fieldOfExpertise:
+          type: string
     ApiError:
       type: object
       properties:

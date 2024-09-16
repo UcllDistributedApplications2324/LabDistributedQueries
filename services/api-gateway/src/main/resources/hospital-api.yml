@@ -11,6 +11,50 @@ externalDocs:
 tags:
   - name: Hospital
 paths:
+  /api/v1/appointment-request:
+    post:
+      tags:
+        - Hospital
+      description: Register a new request for an appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAppointmentRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAppointmentRequestResponse'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /api/v1/appointment-confirmation:
+    post:
+      tags:
+        - Hospital
+      description: Accept or Decline a previously requested appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiAppointmentConfirmation'
+      responses:
+        '200':
+          description: Successful operation
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
   /api/v1/appointment/{day}:
     get:
       tags:
@@ -82,6 +126,32 @@ components:
           type: integer
         accountId:
           type: integer
+    ApiAppointmentRequest:
+      type: object
+      properties:
+        patientId:
+          type: integer
+        neededExpertise:
+          type: string
+          example: 'Gastrology'
+        preferredDay:
+          type: string
+          format: date
+          example: '2023-09-21'
+    ApiAppointmentRequestResponse:
+      type: object
+      properties:
+        appointmentRequestNumber:
+          type: string
+          example: "23-11-5678"
+    ApiAppointmentConfirmation:
+      type: object
+      properties:
+        appointmentRequestNumber:
+          type: string
+          example: "23-11-5678"
+        acceptProposedAppointment:
+          type: boolean
     ApiError:
       type: object
       properties:

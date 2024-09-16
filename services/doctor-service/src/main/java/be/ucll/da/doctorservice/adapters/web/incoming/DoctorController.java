@@ -1,4 +1,4 @@
-package be.ucll.da.doctorservice.web;
+package be.ucll.da.doctorservice.adapters.web.incoming;
 
 import be.ucll.da.doctorservice.api.DoctorApiDelegate;
 import be.ucll.da.doctorservice.api.model.ApiDoctor;
@@ -30,6 +30,7 @@ public class DoctorController implements DoctorApiDelegate {
         apiDoctor.lastName(doctor.lastName());
         apiDoctor.age(doctor.age());
         apiDoctor.address(doctor.address());
+        apiDoctor.setFieldOfExpertise(doctor.fieldOfExpertise());
 
         return ResponseEntity.ok(apiDoctor);
     }
